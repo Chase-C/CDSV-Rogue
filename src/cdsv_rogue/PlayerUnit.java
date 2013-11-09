@@ -22,7 +22,27 @@ public class PlayerUnit extends Unit{
 	
 	public void update(GameContainer gc, int delta) throws SlickException{
 		super.update(gc, delta);
-		this.move();
+		x += 2;
+		if(check("RIGHT")){ 
+			if(collide(SOLID, x + 2, y) == null){ //collide() returns null if there's no collision
+				x += 2;
+			}
+		}
+		if(check("LEFT")){
+			if(collide(SOLID, x - 2, y) == null){
+				x -= 2;
+			}
+		}
+		if(check("UP")){
+			if(collide(SOLID, x, y - 2) == null){
+				y -= 2;
+			}
+		}
+		if(check("DOWN")){
+			if(collide(SOLID, x, y + 2) == null){
+				y += 2;
+			}
+		}
 	}
 	
 	public void move(){
