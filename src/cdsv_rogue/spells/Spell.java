@@ -50,10 +50,12 @@ abstract public class Spell extends Entity {
 			this.destroy();
 		}
 		
-		if(collide(SOLID, x, y) != null) {
+		/*if(collide(SOLID, x, y) != null) {
 			room.removeSpell(this);
 			this.destroy();
-		}
+		}*/
+		
+		checkBounds(0, 0, 1000, 1000);
 		
 	}
 	
