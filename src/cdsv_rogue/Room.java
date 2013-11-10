@@ -3,10 +3,7 @@ package cdsv_rogue;
 import java.util.ArrayList;
 
 import it.randomtower.engine.World;
-<<<<<<< HEAD
 import it.randomtower.engine.entity.Entity;
-=======
->>>>>>> a9a9d92eebcae3c05bd90c56620bc2648ac73863
 import it.randomtower.engine.entity.Solid;
 
 import org.newdawn.slick.*;
