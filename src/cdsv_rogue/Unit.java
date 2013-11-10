@@ -94,7 +94,7 @@ public abstract class Unit extends Entity{
 	
 	public void randSpells() {
 		int numSpells = Spells.values().length;
-		int spell1 = (new Random()).nextInt(numSpells);
+		int spell1 = (new Random()).nextInt(4); // Make sure we have an offensive move
 		int spell2;
 		do {
 			spell2 = (new Random()).nextInt(numSpells);

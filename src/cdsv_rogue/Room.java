@@ -147,7 +147,7 @@ public class Room extends World {
 	}
 	
 	void addEnemies() {
-		int numEnemies = (new Random()).nextInt(3) + 2;
+		int numEnemies = (new Random()).nextInt(5) + 2;
 		for (int i = 0; i < numEnemies; i++) {
 			int px = (new Random()).nextInt(656) + 1;
 			int py = (new Random()).nextInt(496) + 1;
