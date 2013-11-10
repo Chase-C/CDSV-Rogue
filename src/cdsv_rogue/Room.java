@@ -43,7 +43,6 @@ public class Room extends World{
 	
 	//takes care of any of the rendering and graphics in the state
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException{
-		g.scale(2, 2);
 		room.render(0, 0);
 		super.render(gc, sbg, g);
 	}
@@ -51,9 +50,8 @@ public class Room extends World{
 	//where all of the logic happens
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException{
 		super.update(gc, sbg, delta);
-		for(Spell s : spells) {
-			checkCollision(s, player);
-		}
+		//if (winCondition())
+			
 	}
 	
 	public void addSpell(Spell s) {
@@ -65,7 +63,12 @@ public class Room extends World{
 		spells.remove(s);
 	}
 	
-	private void checkCollision(Entity a, Entity b) {
+	public void win() throws SlickException{
+		for (Unit u : enemies)
+			if (!u.dead)
+				return;
+		Image teleport = new Image("../res/teleport.png");
+		teleport.draw(320, 240);
 		
 	}
 	
