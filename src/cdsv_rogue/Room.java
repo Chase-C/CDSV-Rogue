@@ -43,6 +43,7 @@ public class Room extends World{
 	
 	//takes care of any of the rendering and graphics in the state
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException{
+		g.scale(2, 2);
 		room.render(0, 0);
 		super.render(gc, sbg, g);
 	}

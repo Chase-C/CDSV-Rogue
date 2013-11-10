@@ -53,6 +53,7 @@ abstract public class Spell extends Entity {
 			room.removeSpell(this);
 			this.destroy();
 		}
+		
 	}
 	
 	public void checkBounds(float x1, float y1, float x2, float y2){

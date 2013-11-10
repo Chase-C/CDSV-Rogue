@@ -22,7 +22,7 @@ public class FrogUnit extends Unit {
 	@Override
 	public void move(Input i) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 }

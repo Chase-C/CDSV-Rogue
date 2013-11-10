@@ -52,8 +52,8 @@ public class PlayerUnit extends Unit{
 			}
 		}
 		if(check("CAST")) {
-			float dx = i.getMouseX() - x;
-			float dy = i.getMouseY() - y;									
+			float dx = i.getMouseX() / 2 - x - 8;
+			float dy = i.getMouseY() / 2 - y - 8; 
 			
 			float length = (float)Math.sqrt((dx * dx) + (dy * dy));
 			float mod = 5 / length;
@@ -61,7 +61,7 @@ public class PlayerUnit extends Unit{
 			dx *= mod;
 			dy *= mod;
 			
-			room.addSpell(new Fireball(room, this, x + (dx * 5) + 8, y + (dy * 5) + 8, dx, dy));
+			room.addSpell(new Fireball(room, this, x, y, dx, dy));
 		}
 	}
 
