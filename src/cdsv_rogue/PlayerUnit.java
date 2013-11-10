@@ -6,8 +6,15 @@ import cdsv_rogue.spells.Fireball;
 
 public class PlayerUnit extends Unit{
 	
+	private boolean ready;
+	
+	public void setReady(boolean r){
+		ready = r;
+	}
+	
 	public PlayerUnit(float x, float y, Room room) {
 		super(x, y, room);
+		ready = false;
 		setHitBox(0, 0, 16, 16);
 		addType("PLAYER"); //to be used for collision
 		//control schemes can be referred
@@ -16,6 +23,7 @@ public class PlayerUnit extends Unit{
 		define("UP", Input.KEY_W);
 		define("DOWN", Input.KEY_S);
 		define("CAST", Input.MOUSE_LEFT_BUTTON);
+		define("NEXT", Input.KEY_ENTER);
 	}
 	
 	public void render(GameContainer gc, Graphics g) throws SlickException{
@@ -29,28 +37,35 @@ public class PlayerUnit extends Unit{
 		executeStatusEffects(delta);
 	}
 	
-	public void move(Input i){
+	public void move(Input i) throws SlickException{
 		//movement code moves the player if no Entities of type SOLID are in the way
+		dx = 0;
+		dy = 0;
+		
 		if(check("RIGHT")){ 
 			if(collide(SOLID, x + 2, y) == null){ 
-				x += 2;
+				dx = 2;
 			}
 		}
 		if(check("LEFT")){
 			if(collide(SOLID, x - 2, y) == null){
-				x -= 2;
+				dx = -2;
 			}
 		}
 		if(check("UP")){
 			if(collide(SOLID, x, y - 2) == null){
-				y -= 2;
+				dy = -2;
 			}
 		}
 		if(check("DOWN")){
 			if(collide(SOLID, x, y + 2) == null){
-				y += 2;
+				dy = 2;
 			}
 		}
+		
+		x += dx;
+		y += dy;
+		
 		if(check("CAST")) {
 			float dx = i.getMouseX() - x - 8;
 			float dy = i.getMouseY() - y - 8; 
@@ -62,6 +77,13 @@ public class PlayerUnit extends Unit{
 			dy *= mod;
 			
 			room.addSpell(new Fireball(room, this, x, y, dx, dy));
+		}
+		if(check("NEXT")){
+			if(ready){
+				ready = false;
+				//change the Room class's TiledMap reference to the next room
+				room.roomTransition();
+			}
 		}
 	}
 

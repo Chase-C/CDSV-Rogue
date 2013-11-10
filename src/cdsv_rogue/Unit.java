@@ -1,21 +1,19 @@
 package cdsv_rogue;
 
-import org.newdawn.slick.Input;
+import org.newdawn.slick.*;
 
 import it.randomtower.engine.entity.Entity;
 
 public abstract class Unit extends Entity{
 	
-<<<<<<< HEAD
 	protected int currentSpell;
-=======
 	Room room;
 	
 	protected float cooldown;
 	protected float health;
 	protected boolean dead;
 	
-	protected float dx, dy, speedMod;
+	public float dx, dy, speedMod;
 	
 	public enum StatusEffect {
 		BURNING(0), FROZEN(1), SHOCKED(2);
@@ -30,7 +28,6 @@ public abstract class Unit extends Entity{
 	
 	protected boolean[] statusEffects;
 	protected int[] statusDuration;
->>>>>>> bc0e829d2215210fbc2c721485ad447c8f405edb
 
 	public Unit(float x, float y, Room room) {
 		super(x, y);
@@ -41,10 +38,6 @@ public abstract class Unit extends Entity{
 		statusEffects = new boolean[3];
 		statusDuration = new int[3];
 	}
-	
-	//handles the movement of the unit
-<<<<<<< HEAD
-	abstract public void move();
 	
 	//casts the current spell selected
 	//abstract public void castSpell();
@@ -61,8 +54,7 @@ public abstract class Unit extends Entity{
 		System.out.println("Projectile added");
 	}*/
 	
-=======
-	abstract public void move(Input i);
+	abstract public void move(Input i) throws SlickException;
 	
 	public void damage(float amount) {
 		health -= amount;
@@ -122,5 +114,4 @@ public abstract class Unit extends Entity{
 	}
 	//casts the current spell selected
 	//abstract public void castSpell();
->>>>>>> bc0e829d2215210fbc2c721485ad447c8f405edb
 }

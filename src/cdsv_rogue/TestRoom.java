@@ -1,4 +1,4 @@
-package cdsv_rogue;
+/*package cdsv_rogue;
 
 import java.util.ArrayList;
 
@@ -32,12 +32,15 @@ public class TestRoom extends World{
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException{
 		super.init(gc, sbg);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		PlayerUnit player = new PlayerUnit(320, 240);
 		//the add() method adds any Entity to a list, where all of the rendering and updating happens
 		add(player); 
 =======
 		player = new PlayerUnit(320, 240, this);
 		frog = new FrogUnit(120, 340, this);
+=======
+>>>>>>> 38abdab6d645715e9da4d0f3e32be856162bfa27
 		room = new TiledMap("res/levels/exampleRoom.tmx");
 		for(int i = 0; i < room.getObjectCount(0); i++){
 			Solid wall = new Solid(room.getObjectX(0, i), room.getObjectY(0, i),
@@ -47,7 +50,7 @@ public class TestRoom extends World{
 		}
 		
 		player = new PlayerUnit(220, 140, this);
-		frog = new FrogUnit(120, 80, this);
+		frog = new FrogUnit(120, 80, this, player);
 		//the add() method adds any Entity to a list, where all of the rendering and updating happens
 		add(player);
 		add(frog);
@@ -83,4 +86,4 @@ public class TestRoom extends World{
 	private void checkCollision(Entity a, Entity b) {
 		
 	}
-}
+}*/

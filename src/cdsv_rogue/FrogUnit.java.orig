@@ -13,7 +13,11 @@ public class FrogUnit extends Unit {
 	Unit enemy;
 	int dt;
 
-	public FrogUnit(float x, float y, Room room, Unit enemy) {
+<<<<<<< HEAD
+	public FrogUnit(float x, float y, TestRoom room, Unit enemy) {
+=======
+	public FrogUnit(float x, float y, Room room) {
+>>>>>>> 3c8ad7e89677d68d224baa7c3c40d82724c6175c
 		super(x, y, room);
 		setHitBox(0, 0, 16, 16);
 		addType("FROG");
@@ -34,31 +38,22 @@ public class FrogUnit extends Unit {
 		dt += delta;
 		if(dt > 100) {
 			dt = 0;
-			float edx = enemy.dx;
-			float edy = enemy.dy;
+			float b = ((enemy.x - x) * enemy.dx) + ((enemy.y - y) * enemy.dy);
+			if(b < 0) return;
 			
-			float a = (edx * edx) + (edy * edy) - 25;
-			float b = ((enemy.x - x) * edx) + ((enemy.y - y) * edy);
+			float a = (enemy.dx * enemy.dx) + (enemy.dy * enemy.dy) - 25;
 			float c = ((enemy.x - x) * (enemy.x - x)) + ((enemy.y - y) * (enemy.y - y));
 			
-			float inside = (b * b) - (4 * a * c);
-			if(inside < 0) {
-				System.out.printf("%g\n", inside);
-				return;
-			}
+			float t = ((-b) + (float)Math.sqrt((b * b) - (4 * a * c))) / (2 * a);
 			
-			float t = (float)Math.abs(((-b) + (float)Math.sqrt((b * b) - (4 * a * c))) / (2 * a));
-			
-			dx = (enemy.x - x + (edx * t));
-			dy = (enemy.y - y + (edy * t));								
+			dx = (enemy.x - x + (enemy.dx * t));
+			dy = (enemy.y - y + (enemy.dy * t));								
 			
 			float length = (float)Math.sqrt((dx * dx) + (dy * dy));
 			float mod = 5 / length;
 			
 			dx *= mod;
 			dy *= mod;
-			
-			System.out.printf("t: %g, b: %g, edx: %g, edy: %g\n", t, b, edx, edy);
 			
 			room.addSpell(new Fireball(room, this, x + (dx * 5) + 8, y + (dy * 5) + 8, dx, dy));
 		}
@@ -67,6 +62,7 @@ public class FrogUnit extends Unit {
 	@Override
 	public void move(Input i) {
 		// TODO Auto-generated method stub
+		
 	}
 
 }
