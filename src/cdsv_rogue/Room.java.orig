@@ -3,6 +3,7 @@ package cdsv_rogue;
 import java.util.ArrayList;
 
 import it.randomtower.engine.World;
+import it.randomtower.engine.entity.Entity;
 import it.randomtower.engine.entity.Solid;
 
 import org.newdawn.slick.*;
@@ -75,6 +76,10 @@ public class Room extends World {
 				return;
 		//Image teleport = new Image("../res/teleport.png");
 		//teleport.draw(320, 240);
+<<<<<<< HEAD
+=======
+
+>>>>>>> Chase
 	}
 
 }

@@ -47,7 +47,7 @@ public class FrogUnit extends Unit {
 				return;
 			}
 			
-			float t = (float)Math.abs(((-b) + (float)Math.sqrt((b * b) - (4 * a * c))) / (2 * a));
+			float t = (float)Math.abs(((-b) + (float)Math.sqrt(inside)) / (2 * a));
 			
 			dx = (enemy.x - x + (edx * t));
 			dy = (enemy.y - y + (edy * t));								
