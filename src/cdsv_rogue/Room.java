@@ -16,6 +16,7 @@ public class Room extends World{
 	
 	private PlayerUnit player;
 	private ArrayList<Spell> spells;
+	private ArrayList<Unit> enemies;
 	private TiledMap room;
 	
 	public Room(int id, GameContainer gc) throws SlickException{
@@ -37,11 +38,11 @@ public class Room extends World{
          //the add() method adds any Entity to a list, where all of the rendering and updating happens
          add(player);
          spells = new ArrayList<Spell>();
+         enemies = new ArrayList<Unit>();
 	}
 	
 	//takes care of any of the rendering and graphics in the state
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException{
-		g.scale(2, 2);
 		room.render(0, 0);
 		super.render(gc, sbg, g);
 	}
@@ -49,9 +50,7 @@ public class Room extends World{
 	//where all of the logic happens
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException{
 		super.update(gc, sbg, delta);
-		for(Spell s : spells) {
-			checkCollision(s, player);
-		}
+		win();
 	}
 	
 	public void addSpell(Spell s) {
@@ -63,7 +62,12 @@ public class Room extends World{
 		spells.remove(s);
 	}
 	
-	private void checkCollision(Entity a, Entity b) {
+	public void win() throws SlickException{
+		for (Unit u : enemies)
+			if (!u.dead)
+				return;
+		Image teleport = new Image("../res/teleport.png");
+		teleport.draw(320, 240);
 		
 	}
 	
