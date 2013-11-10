@@ -79,7 +79,8 @@ public class PlayerUnit extends Unit{
 			room.addSpell(new Fireball(room, this, x, y, dx, dy));
 		}
 		if(check("NEXT")){
-			if(ready){
+			//teleport only works if within 8 pixels of the teleporter
+			if(ready && (Math.abs(x - 320) < 8 && Math.abs(y - 240) < 8)){
 				ready = false;
 				//change the Room class's TiledMap reference to the next room
 				room.roomTransition();
