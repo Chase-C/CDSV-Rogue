@@ -26,13 +26,14 @@ public class TestRoom extends World{
 									0, new Image(room.getObjectWidth(0, i), room.getObjectHeight(0, i)));
 			add(wall);
 		}
-		PlayerUnit player = new PlayerUnit(320, 240);
+		PlayerUnit player = new PlayerUnit(32, 32);
 		//the add() method adds any Entity to a list, where all of the rendering and updating happens
 		add(player); 
 	}
 	
 	//takes care of any of the rendering and graphics in the state
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException{
+		g.scale(2, 2);
 		room.render(0, 0);
 		super.render(gc, sbg, g);
 	}
