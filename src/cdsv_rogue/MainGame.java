@@ -20,7 +20,7 @@ public class MainGame extends StateBasedGame{
 	public static void main(String[] args){
 		try{ //the AppGameContainer runs the game
 			AppGameContainer appgc = new AppGameContainer(new MainGame());
-			appgc.setDisplayMode(640, 480, false);
+			appgc.setDisplayMode(656, 496, false);
 			appgc.setTargetFrameRate(60);
 			appgc.setShowFPS(false);
 			appgc.start();
