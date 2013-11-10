@@ -95,7 +95,7 @@ public abstract class Unit extends Entity{
 		int spell3;
 		do {
 			spell3 = (new Random()).nextInt(numSpells);
-		} while (spell3 == spell1 && spell3 == spell2);
+		} while (spell3 == spell1 || spell3 == spell2);
 		
 		System.out.printf("%d\n", spell1);
 		System.out.println(Spells.values()[spell1]);
