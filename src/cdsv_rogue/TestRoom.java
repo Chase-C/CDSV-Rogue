@@ -1,4 +1,4 @@
-package cdsv_rogue;
+/*package cdsv_rogue;
 
 import java.util.ArrayList;
 
@@ -72,4 +72,4 @@ public class TestRoom extends World{
 	private void checkCollision(Entity a, Entity b) {
 		
 	}
-}
+}*/
