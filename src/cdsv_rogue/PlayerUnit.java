@@ -31,26 +31,33 @@ public class PlayerUnit extends Unit{
 	
 	public void move(Input i){
 		//movement code moves the player if no Entities of type SOLID are in the way
+		dx = 0;
+		dy = 0;
+		
 		if(check("RIGHT")){ 
 			if(collide(SOLID, x + 2, y) == null){ 
-				x += 2;
+				dx = 2;
 			}
 		}
 		if(check("LEFT")){
 			if(collide(SOLID, x - 2, y) == null){
-				x -= 2;
+				dx = -2;
 			}
 		}
 		if(check("UP")){
 			if(collide(SOLID, x, y - 2) == null){
-				y -= 2;
+				dy = -2;
 			}
 		}
 		if(check("DOWN")){
 			if(collide(SOLID, x, y + 2) == null){
-				y += 2;
+				dy = 2;
 			}
 		}
+		
+		x += dx;
+		y += dy;
+		
 		if(check("CAST")) {
 			float dx = i.getMouseX() - x - 8;
 			float dy = i.getMouseY() - y - 8; 
