@@ -57,7 +57,7 @@ public class PlayerUnit extends Unit{
 		g.setColor(Color.green);
 		g.drawRect(x, y - 12, 16 * health / maxHealth, 4);
 		
-		String status = "health: " + health + "/" + maxHealth + "	Spells: 1 - " + spells[0].getName() + ", 2 - " + spells[1].getName() + ", 3 - " + spells[2].getName();
+		//String status = "health: " + health + "/" + maxHealth + "	Spells: 1 - " + spells[0].getName() + ", 2 - " + spells[1].getName() + ", 3 - " + spells[2].getName();
 	}
 	
 	public void update(GameContainer gc, int delta) throws SlickException{

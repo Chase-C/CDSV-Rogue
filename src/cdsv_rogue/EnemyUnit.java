@@ -1,10 +1,12 @@
 package cdsv_rogue;
 
+import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.SpriteSheet;
 
 import cdsv_rogue.spells.Fireball;
 
@@ -12,18 +14,35 @@ public class EnemyUnit extends Unit {
 
 	Unit player;
 	int dt;
+
+	private boolean facingRight;
+	private Animation animation, idleRight, idleLeft, walkLeft, walkRight;
 	
-	public EnemyUnit(float x, float y, Room room, Unit player) {
+	public EnemyUnit(float x, float y, Room room, Unit player) throws SlickException {
 		super(x, y, room);
 		setHitBox(0, 0, 16, 16);
 		addType("ENEMY");
 		
+		facingRight = true;
+		
 		this.player = player;
+		
+		//set up animation
+		idleRight = new Animation(new SpriteSheet("res/sprites/guy.png", 9, 19), 100);
+		idleLeft = new Animation(new SpriteSheet("res/sprites/guyf.png", 9, 19), 100);
+		walkLeft = new Animation(new SpriteSheet("res/sprites/guywalkf.png", 9, 19), 100);
+		walkRight = new Animation(new SpriteSheet("res/sprites/guywalk.png", 9, 19), 100);
+		animation = idleRight;
 	}
 	
 	public void render(GameContainer gc, Graphics g) throws SlickException{
-		g.setColor(Color.red);
-		g.drawRect(x, y, 16, 16);
+		if(dx == 0 && dy == 0){
+			if(facingRight)
+				animation = idleRight;
+			else
+				animation = idleLeft;
+		}
+		animation.draw(x, y);
 	}
 
 	public void update(GameContainer gc, int delta) throws SlickException {
@@ -32,7 +51,7 @@ public class EnemyUnit extends Unit {
 		executeStatusEffects(delta);
 
 		dt += delta;
-		if (dt > 1500) {
+		if (dt > 1000) {
 			if (distToPlayer() < 400) {
 				dt = 0;
 				float edx = player.dx;
@@ -92,6 +111,12 @@ public class EnemyUnit extends Unit {
 			
 			if(player.y > y) dy = -2 * speedMod;
 			else if(player.y < y) dy = 2 * speedMod;
+		}
+		
+		if(dx > 0) {
+			facingRight = true;
+		} else if(dx < 0) {
+			facingRight = false;
 		}
 		
 		if(collide(SOLID, x + dx, y) == null) {

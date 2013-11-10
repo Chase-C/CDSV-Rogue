@@ -146,7 +146,7 @@ public class Room extends World {
 		}
 	}
 	
-	void addEnemies() {
+	void addEnemies() throws SlickException {
 		int numEnemies = (new Random()).nextInt(5) + 2;
 		for (int i = 0; i < numEnemies; i++) {
 			int px = (new Random()).nextInt(656) + 1;
