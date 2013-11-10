@@ -7,14 +7,17 @@ import cdsv_rogue.spells.*;
 public class PlayerUnit extends Unit{
 	
 	private boolean ready;
+	private boolean facingRight;
+	private Animation animation, idleRight, idleLeft, walkLeft, walkRight;
 	
 	public void setReady(boolean r){
 		ready = r;
 	}
 	
-	public PlayerUnit(float x, float y, Room room) {
+	public PlayerUnit(float x, float y, Room room) throws SlickException{
 		super(x, y, room);
 		ready = false;
+		facingRight = true;
 		setHitBox(0, 0, 16, 16);
 		addType("PLAYER"); //to be used for collision
 		//control schemes can be referred
@@ -31,17 +34,30 @@ public class PlayerUnit extends Unit{
 		define("SPELL1", Input.KEY_1);
 		define("SPELL2", Input.KEY_2);
 		define("SPELL3", Input.KEY_3);
+		
+		//set up animation
+				idleRight = new Animation(new SpriteSheet("res/sprites/guy.png", 9, 19), 100);
+				idleLeft = new Animation(new SpriteSheet("res/sprites/guyf.png", 9, 19), 100);
+				walkLeft = new Animation(new SpriteSheet("res/sprites/guywalkf.png", 9, 19), 100);
+				walkRight = new Animation(new SpriteSheet("res/sprites/guywalk.png", 9, 19), 100);
+				animation = idleRight;
 	}
 	
 	public void render(GameContainer gc, Graphics g) throws SlickException{
-		super.render(gc, g);
-		g.setColor(Color.blue);
-		g.drawRect(x, y, 16, 16);
-		
-		String status = "health: " + health + "/" + maxHealth + "	Spells: 1 - " + spells[0].getName() + ", 2 - " + spells[1].getName() + ", 3 - " + spells[2].getName();
+		if(dx == 0 && dy == 0){
+			if(facingRight)
+				animation = idleRight;
+			else
+				animation = idleLeft;
+		}
+		animation.draw(x, y);
 		
 		g.setColor(Color.red);
-		g.drawString(status, 460, 60);
+		g.drawRect(x, y - 12, 16, 4);
+		g.setColor(Color.green);
+		g.drawRect(x, y - 12, 16 * health / maxHealth, 4);
+		
+		String status = "health: " + health + "/" + maxHealth + "	Spells: 1 - " + spells[0].getName() + ", 2 - " + spells[1].getName() + ", 3 - " + spells[2].getName();
 	}
 	
 	public void update(GameContainer gc, int delta) throws SlickException{
@@ -57,13 +73,17 @@ public class PlayerUnit extends Unit{
 		dy = 0;
 		
 		if(check("RIGHT")){ 
+			facingRight = true;
 			if(collide(SOLID, x + 2, y) == null){ 
 				dx = 2 * speedMod;
+				animation = walkRight;
 			}
 		}
 		if(check("LEFT")){
+			facingRight = false;
 			if(collide(SOLID, x - 2, y) == null){
 				dx = -2 * speedMod;
+				animation = walkLeft;
 			}
 		}
 		if(check("UP")){
@@ -98,7 +118,6 @@ public class PlayerUnit extends Unit{
 			dx *= mod;
 			dy *= mod;
 			
-			System.out.printf("%d\n", currentSpell);
 			System.out.println(spells[currentSpell]);
 			spells[currentSpell].cast(room, this, x, y, mx, my, dx, dy);
 		}
@@ -110,5 +129,4 @@ public class PlayerUnit extends Unit{
 			}
 		}
 	}
-
 }

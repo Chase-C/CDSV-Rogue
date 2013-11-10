@@ -1,13 +1,13 @@
 package cdsv_rogue;
 
-import java.util.ArrayList;
-
 import it.randomtower.engine.World;
 import it.randomtower.engine.entity.Entity;
 import it.randomtower.engine.entity.Solid;
 
+import java.util.ArrayList;
+
 import org.newdawn.slick.*;
-import org.newdawn.slick.state.*;
+import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.tiled.TiledMap;
 
 import cdsv_rogue.spells.Spell;
@@ -21,6 +21,9 @@ public class Room extends World {
 	private ArrayList<Unit> enemies;
 	private TiledMap room;
 	private Animation teleport;
+	
+	private int currentRoom;
+	private Image message;
 
 	public Room(int id, GameContainer gc) throws SlickException {
 		super(id, gc);
@@ -47,6 +50,12 @@ public class Room extends World {
 		add(player);
 		add(enemy);
 		add(spider);
+
+		room = new TiledMap("res/levels/level1.tmx");
+		currentRoom = 1;
+		message = new Image("res/pressenter.png");
+		generateSolids(room);
+		// the add() method adds any Entity to a list, where all of the
 		//keep track of enemies
 		enemies = new ArrayList<Unit>();
 		enemies.add(enemy);
@@ -56,6 +65,7 @@ public class Room extends World {
 		//animation setup for teleport object
 		SpriteSheet teleportFrames = new SpriteSheet("res/tele.png", 16, 16);
 		teleport = new Animation(teleportFrames, 120);
+		add(player);
 	}
 
 	// takes care of any of the rendering and graphics in the state
@@ -97,23 +107,47 @@ public class Room extends World {
 	//runs when the player moves to the next room
 	public void roomTransition() throws SlickException{
 		//reset all the enemies, solids, and player coordinates
-		player.x = player.startx;
-		player.y = player.starty;
+		player.x = player.startx + 16;
+		player.y = player.starty + 16;
 		player.randSpells();
-		
 		ArrayList<Entity> entities = (ArrayList<Entity>) super.getEntities();
 		for(int i = 0; i < entities.size(); i++){
 			if(entities.get(i).isType("SOLID") || entities.get(i).isType("ENEMY")){
 				entities.get(i).destroy();
 			}
 		}
-		//re-initialize solids, enemies, and player
-		room = new TiledMap("res/levels/exampleRoom2.tmx"); //this should change depending on the current room
-		for (int i = 0; i < room.getObjectCount(0); i++) {
-			Solid wall = new Solid(room.getObjectX(0, i),
-					room.getObjectY(0, i), room.getObjectWidth(0, i),
-					room.getObjectHeight(0, i), 0, new Image(
-							room.getObjectWidth(0, i), room.getObjectHeight(0,
+
+		switch(currentRoom){ //sets up stuff from the next room
+			case 1: //move to second room
+				room = new TiledMap("res/levels/level2.tmx"); //this should change depending on the current room
+				//enemies.add(frog);
+				break;
+			case 2: //move to third room
+				room = new TiledMap("res/levels/level3.tmx");
+				break;
+			case 3: //move to fourth room
+				room = new TiledMap("res/levels/level4.tmx");
+				break;
+			case 4: //move to fifth room
+				room = new TiledMap("res/levels/level5.tmx");
+				break;
+			case 5: //move to sixth room
+				room = new TiledMap("res/levels/level6.tmx");
+				break;
+		}
+		//anything beyond this line should run regardless of the current room
+		currentRoom++;
+		generateSolids(room);
+		add(player);
+	}
+	
+	//creates Solid objects around the room based on a given TiledMap
+	private void generateSolids(TiledMap map) throws SlickException{
+		for (int i = 0; i < map.getObjectCount(0); i++) {
+			Solid wall = new Solid(map.getObjectX(0, i),
+					map.getObjectY(0, i), map.getObjectWidth(0, i),
+					map.getObjectHeight(0, i), 0, new Image(
+							map.getObjectWidth(0, i), map.getObjectHeight(0,
 									i)));
 			add(wall);
 		}

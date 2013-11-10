@@ -78,10 +78,10 @@ public abstract class Unit extends Entity{
 	}*/
 	
 	public void render(GameContainer gc, Graphics g) throws SlickException{
-		g.setColor(Color.red);
+		/*g.setColor(Color.red);
 		g.drawRect(x, y - 12, 16, 4);
 		g.setColor(Color.green);
-		g.drawRect(x, y - 12, 16 * health / maxHealth, 4);
+		g.drawRect(x, y - 12, 16 * health / maxHealth, 4);*/
 	}
 	
 	protected void updatePassives() {

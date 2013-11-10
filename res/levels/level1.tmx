@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="41" height="31" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="tiles" tilewidth="16" tileheight="16">
+  <image source="tiles.png" width="176" height="80"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="41" height="31">
+  <data encoding="base64" compression="zlib">
+   eJzVl8sSgzAIRRPdqmv3us///11dyAxDuQTwMe3izrS1wEkgBPdSyv4HmjpaDs2KxkP11HConf+tFzWwGB5GstM4f4FR2kYZe/nRYm1iP95mrIZvtJeRXMsckCK5jnBGGKeC+SL1aOXHw4hySVrB70+dGe6TGLdTiBEpy7g6xfcxymYxzs7YXhHjwoT+i57xuK2jzD7IeqReLXmozntxtbXS91bstUYYrd7GmUZgJ+0rsyUbuQ5573JlGSM9hDMuws5zb2QYR/G816/pczP8Zhi19W0F33WSK3NPI0X2kc6tVXMy5lU+xIj80Tnu5bRXb3LNzfAdyTXleS7fXMgOMWrzSCbXVp4lg+Xf4ruSa82/VouIEdUa7z3ZM2PVkee89NSUOE/lOqsM4xRgHEAMa36IcFiSjOhM0kxs9RHt7rXEe4U1z0V6+KDwaPIy8nnzjrmHZnTvrP42Y2Yu9TDfwZh5v4ns6VXG6DvHG4y/rg8LYkCi
+  </data>
+ </layer>
+ <objectgroup name="Objects" width="41" height="31" visible="0">
+  <object x="0" y="0" width="656" height="16"/>
+  <object x="0" y="16" width="16" height="480"/>
+  <object x="16" y="480" width="640" height="16"/>
+  <object x="496" y="384" width="16" height="96"/>
+  <object x="176" y="176" width="80" height="16"/>
+  <object x="176" y="192" width="16" height="96"/>
+  <object x="160" y="272" width="16" height="112"/>
+  <object x="240" y="368" width="112" height="16"/>
+  <object x="416" y="320" width="16" height="48"/>
+  <object x="496" y="272" width="64" height="16"/>
+  <object x="416" y="160" width="16" height="80"/>
+  <object x="304" y="160" width="112" height="16"/>
+  <object x="304" y="16" width="16" height="144"/>
+  <object x="640" y="16" width="16" height="464"/>
+ </objectgroup>
+</map>
