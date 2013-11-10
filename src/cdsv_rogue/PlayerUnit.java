@@ -52,8 +52,8 @@ public class PlayerUnit extends Unit{
 			}
 		}
 		if(check("CAST")) {
-			float dx = i.getMouseX() / 2 - x - 8;
-			float dy = i.getMouseY() / 2 - y - 8; 
+			float dx = i.getMouseX() - x - 8;
+			float dy = i.getMouseY() - y - 8; 
 			
 			float length = (float)Math.sqrt((dx * dx) + (dy * dy));
 			float mod = 5 / length;

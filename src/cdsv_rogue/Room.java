@@ -66,9 +66,8 @@ public class Room extends World{
 		for (Unit u : enemies)
 			if (!u.dead)
 				return;
-		Image teleport = new Image("../res/teleport.png");
-		teleport.draw(320, 240);
-		
+		//Image teleport = new Image("../res/teleport.png");
+		//teleport.draw(320, 240);
 	}
 	
 }
