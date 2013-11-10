@@ -22,6 +22,7 @@ public class Room extends World {
 	private Animation teleport;
 	private int currentRoom;
 	private Image message;
+	private Sound currentSong;
 
 	public Room(int id, GameContainer gc) throws SlickException {
 		super(id, gc);
@@ -33,6 +34,7 @@ public class Room extends World {
 		super.init(gc, sbg);
 		room = new TiledMap("res/levels/level1.tmx");
 		currentRoom = 1;
+		currentSong = new Sound("res/sounds/villageLoopable.wav");
 		message = new Image("res/pressenter.png");
 		generateSolids(room);
 		player = new PlayerUnit(320, 240, this);
@@ -67,6 +69,14 @@ public class Room extends World {
 			throws SlickException {
 		super.update(gc, sbg, delta);
 		win();
+		switch(currentRoom){
+			case 1: case 2: case 3: case 4:
+				currentSong.loop();
+				break;
+			case 5: case 6:
+				currentSong.play();
+				break;
+		}
 	}
 
 	public void addSpell(Spell s) {
@@ -100,8 +110,6 @@ public class Room extends World {
 		switch(currentRoom){ //sets up stuff from the next room
 			case 1: //move to second room
 				room = new TiledMap("res/levels/level2.tmx"); //this should change depending on the current room
-				add(frog);
-				//enemies.add(frog);
 				break;
 			case 2: //move to third room
 				room = new TiledMap("res/levels/level3.tmx");
@@ -117,7 +125,8 @@ public class Room extends World {
 				break;
 		}
 		//anything beyond this line should run regardless of the current room
-		currentRoom++;
+		if(currentRoom != 6)
+			currentRoom++;
 		generateSolids(room);
 		add(player);
 	}
