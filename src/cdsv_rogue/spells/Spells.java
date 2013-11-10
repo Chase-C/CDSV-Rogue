@@ -9,7 +9,8 @@ public enum Spells {
 	LIGHTNINGBOLT("Lightning Bolt"),
 	ROCKTHROW("Rock Throw"),
 	HEAL("Heal"),
-	PASSIVEHEAL("Passive Heal");
+	PASSIVEHEAL("Passive Heal"),
+	SHIELD("Shield");
 	
 	public String name;
 	
@@ -46,6 +47,9 @@ public enum Spells {
 			break;
 		case PASSIVEHEAL:
 			new PassiveHeal(room, parent, x, y, tx, ty, dx, dy);
+			break;
+		case SHIELD:
+			new Shield(room, parent, x, y, tx, ty, dx, dy);
 			break;
 		}
 	}

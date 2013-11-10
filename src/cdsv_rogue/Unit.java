@@ -34,6 +34,9 @@ public abstract class Unit extends Entity{
 		public int getIndex() { return index; }
 	}
 	
+	protected boolean shielded;
+	protected int shieldDuration;
+	
 	protected boolean[] statusEffects;
 	protected int[] statusDuration;
 
@@ -51,6 +54,10 @@ public abstract class Unit extends Entity{
 		passiveSpells = new ArrayList<Spell>(0);
 		
 		dead = false;
+		
+		shielded = false;
+		shieldDuration = 0;
+		
 		statusEffects = new boolean[4];
 		statusDuration = new int[4];
 	}
@@ -84,7 +91,7 @@ public abstract class Unit extends Entity{
 	
 	abstract public void move(Input i) throws SlickException;
 	
-	private void randSpells() {
+	public void randSpells() {
 		int numSpells = Spells.values().length;
 		int spell1 = (new Random()).nextInt(numSpells);
 		int spell2;
@@ -123,7 +130,13 @@ public abstract class Unit extends Entity{
 		if(health <= 0) {
 			health = 0;
 			dead = true;
+			this.destroy();
 		}
+	}
+	
+	public void shield(int duration) {
+		shielded = true;
+		shieldDuration = duration;
 	}
 	
 	protected void executeStatusEffects(int delta) {
@@ -142,6 +155,12 @@ public abstract class Unit extends Entity{
 			speedMod = 0.0f;
 		}
 		
+		shieldDuration -= delta;
+		if(shieldDuration < 0) {
+			shieldDuration = 0;
+			shielded = false;
+		}
+		
 		for(StatusEffect s : StatusEffect.values()) {
 			statusDuration[s.getIndex()] -= delta;
 			if(statusDuration[s.getIndex()] <= 0) {
@@ -152,6 +171,8 @@ public abstract class Unit extends Entity{
 	}
 	
 	public void burn(int amount, int duration) {
+		if(shielded) return;
+		
 		damage(amount);
 		statusEffects[StatusEffect.BURNING.getIndex()] = true;
 		statusDuration[StatusEffect.BURNING.getIndex()] = duration;

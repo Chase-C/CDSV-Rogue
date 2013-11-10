@@ -15,7 +15,8 @@ import cdsv_rogue.spells.Spell;
 public class Room extends World {
 
 	private PlayerUnit player;
-	private FrogUnit frog;
+	private EnemyUnit enemy;
+	private SpiderUnit spider;
 	private ArrayList<Spell> spells;
 	private ArrayList<Unit> enemies;
 	private TiledMap room;
@@ -39,13 +40,17 @@ public class Room extends World {
 			add(wall);
 		}
 		player = new PlayerUnit(320, 240, this);
-		frog = new FrogUnit(120, 80, this, player);
+		enemy = new EnemyUnit(120, 80, this, player);
+		spider = new SpiderUnit(180, 100, this, player);
 		// the add() method adds any Entity to a list, where all of the
 		// rendering and updating happens
 		add(player);
-		add(frog);
+		add(enemy);
+		add(spider);
 		//keep track of enemies
 		enemies = new ArrayList<Unit>();
+		enemies.add(enemy);
+		enemies.add(spider);
 		//enemies.add(frog);
 		spells = new ArrayList<Spell>();
 		//animation setup for teleport object
@@ -94,6 +99,8 @@ public class Room extends World {
 		//reset all the enemies, solids, and player coordinates
 		player.x = player.startx;
 		player.y = player.starty;
+		player.randSpells();
+		
 		ArrayList<Entity> entities = (ArrayList<Entity>) super.getEntities();
 		for(int i = 0; i < entities.size(); i++){
 			if(entities.get(i).isType("SOLID") || entities.get(i).isType("ENEMY")){
@@ -112,8 +119,8 @@ public class Room extends World {
 		}
 		
 		add(player);
-		add(frog);
-		enemies.add(frog);
+		add(enemy);
+		add(spider);
 	}
 
 	public TiledMap getMap() {
