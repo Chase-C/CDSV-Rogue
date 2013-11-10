@@ -17,7 +17,7 @@ public class PlayerUnit extends Unit{
 	
 	public void render(GameContainer gc, Graphics g){
 		g.setColor(Color.blue);
-		g.drawRect(0, 0, 32, 32);
+		g.drawRect(x, y, 32, 32);
 	}
 	
 	public void update(GameContainer gc, int delta) throws SlickException{

@@ -1,7 +1,6 @@
 package cdsv_rogue;
 
 import it.randomtower.engine.World;
-import it.randomtower.engine.entity.*;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 
@@ -14,6 +13,9 @@ public class TestRoom extends World{
 	//initializes anything right when the state starts
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException{
 		super.init(gc, sbg);
+		PlayerUnit player = new PlayerUnit(320, 240);
+		//the add() method adds any Entity to a list, where all of the rendering and updating happens
+		add(player); 
 	}
 	
 	//takes care of any of the rendering and graphics in the state
