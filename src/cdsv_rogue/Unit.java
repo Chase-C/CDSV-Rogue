@@ -14,7 +14,7 @@ public abstract class Unit extends Entity{
 	abstract public void move();
 	
 	//casts the current spell selected
-	abstract public void castSpell();
+	//abstract public void castSpell();
 	
 	/*
 	 * Different methods will represent the different kinds of spells.
@@ -22,10 +22,10 @@ public abstract class Unit extends Entity{
 	 * 1 - fireball
 	 * 2, 3 and so on will represent the other spells
 	 */
-	public void castFireball(){
+	/*public void castFireball(){
 		Projectile fireball = new Projectile(x, y);
 		TestRoom.projectiles.add(fireball);
 		System.out.println("Projectile added");
-	}
+	}*/
 	
 }
