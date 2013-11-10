@@ -31,15 +31,13 @@ public class Room extends World {
 	public void init(GameContainer gc, StateBasedGame sbg)
 			throws SlickException {
 		super.init(gc, sbg);
-		room = new TiledMap("res/levels/exampleRoom.tmx");
+		room = new TiledMap("res/levels/level1.tmx");
 		currentRoom = 1;
 		message = new Image("res/pressenter.png");
 		generateSolids(room);
 		player = new PlayerUnit(320, 240, this);
-		frog = new FrogUnit(120, 80, this, player);
+		frog = new FrogUnit(112, 80, this, player);
 		// the add() method adds any Entity to a list, where all of the
-		// rendering and updating happens
-		add(player);
 		//add(frog);
 		//keep track of enemies
 		enemies = new ArrayList<Unit>();
@@ -48,6 +46,7 @@ public class Room extends World {
 		//animation setup for teleport object
 		SpriteSheet teleportFrames = new SpriteSheet("res/tele.png", 16, 16);
 		teleport = new Animation(teleportFrames, 120);
+		add(player);
 	}
 
 	// takes care of any of the rendering and graphics in the state
@@ -61,7 +60,6 @@ public class Room extends World {
 			teleport.draw(320, 240);
 			message.draw(269, 180);
 		}
-		
 	}
 
 	// where all of the logic happens
@@ -90,8 +88,8 @@ public class Room extends World {
 	//runs when the player moves to the next room
 	public void roomTransition() throws SlickException{
 		//reset all the enemies, solids, and player coordinates
-		player.x = player.startx;
-		player.y = player.starty;
+		player.x = player.startx + 16;
+		player.y = player.starty + 16;
 		ArrayList<Entity> entities = (ArrayList<Entity>) super.getEntities();
 		for(int i = 0; i < entities.size(); i++){
 			if(entities.get(i).isType("SOLID") || entities.get(i).isType("ENEMY") || entities.get(i).isType("SPELLS")){
@@ -101,15 +99,25 @@ public class Room extends World {
 		//re-initialize solids, enemies, and player
 		switch(currentRoom){ //sets up stuff from the next room
 			case 1: //move to second room
-				room = new TiledMap("res/levels/exampleRoom2.tmx"); //this should change depending on the current room
+				room = new TiledMap("res/levels/level2.tmx"); //this should change depending on the current room
 				add(frog);
-				enemies.add(frog);
+				//enemies.add(frog);
 				break;
 			case 2: //move to third room
+				room = new TiledMap("res/levels/level3.tmx");
 				break;
-			//and so on for the other rooms
+			case 3: //move to fourth room
+				room = new TiledMap("res/levels/level4.tmx");
+				break;
+			case 4: //move to fifth room
+				room = new TiledMap("res/levels/level5.tmx");
+				break;
+			case 5: //move to sixth room
+				room = new TiledMap("res/levels/level6.tmx");
+				break;
 		}
 		//anything beyond this line should run regardless of the current room
+		currentRoom++;
 		generateSolids(room);
 		add(player);
 	}

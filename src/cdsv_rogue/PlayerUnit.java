@@ -7,14 +7,17 @@ import cdsv_rogue.spells.Fireball;
 public class PlayerUnit extends Unit{
 	
 	private boolean ready;
+	private boolean facingRight;
+	private Animation animation, idleRight, idleLeft, walkLeft, walkRight;
 	
 	public void setReady(boolean r){
 		ready = r;
 	}
 	
-	public PlayerUnit(float x, float y, Room room) {
+	public PlayerUnit(float x, float y, Room room) throws SlickException{
 		super(x, y, room);
 		ready = false;
+		facingRight = true;
 		setHitBox(0, 0, 16, 16);
 		addType("PLAYER"); //to be used for collision
 		//control schemes can be referred
@@ -24,11 +27,22 @@ public class PlayerUnit extends Unit{
 		define("DOWN", Input.KEY_S);
 		define("CAST", Input.MOUSE_LEFT_BUTTON);
 		define("NEXT", Input.KEY_ENTER);
+		//set up animation
+		idleRight = new Animation(new SpriteSheet("res/sprites/guy.png", 9, 19), 100);
+		idleLeft = new Animation(new SpriteSheet("res/sprites/guyf.png", 9, 19), 100);
+		walkLeft = new Animation(new SpriteSheet("res/sprites/guywalkf.png", 9, 19), 100);
+		walkRight = new Animation(new SpriteSheet("res/sprites/guywalk.png", 9, 19), 100);
+		animation = idleRight;
 	}
 	
 	public void render(GameContainer gc, Graphics g) throws SlickException{
-		g.setColor(Color.blue);
-		g.drawRect(x, y, 16, 16);
+		if(dx == 0 && dy == 0){
+			if(facingRight)
+				animation = idleRight;
+			else
+				animation = idleLeft;
+		}
+		animation.draw(x, y);
 	}
 	
 	public void update(GameContainer gc, int delta) throws SlickException{
@@ -43,13 +57,17 @@ public class PlayerUnit extends Unit{
 		dy = 0;
 		
 		if(check("RIGHT")){ 
+			facingRight = true;
 			if(collide(SOLID, x + 2, y) == null){ 
 				dx = 2;
+				animation = walkRight;
 			}
 		}
 		if(check("LEFT")){
+			facingRight = false;
 			if(collide(SOLID, x - 2, y) == null){
 				dx = -2;
+				animation = walkLeft;
 			}
 		}
 		if(check("UP")){

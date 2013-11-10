@@ -3,14 +3,9 @@
  <tileset firstgid="1" name="tiles" tilewidth="16" tileheight="16">
   <image source="tiles.png" width="176" height="80"/>
  </tileset>
- <layer name="Solids" width="41" height="31">
-  <data encoding="base64" compression="zlib">
-   eJzt1zEOACAIwEB+5P9/5+6gDg2CaRM2E47RERGjwVROI5NGJo1MGpk0Mp2MWTfs9vxgrJBGJo1MGpk0Mt0a13eZ/1GNGjsaX9bJWH0mQvMtiQ==
-  </data>
- </layer>
  <layer name="Tile Layer 1" width="41" height="31">
   <data encoding="base64" compression="zlib">
-   eJzt1DsKACEMRVHF1gW4/5Va2QhqCDEffQ9uNTJzGielGMuO+81YiVkZqT6OE0YZ509GqpPzXknjrSIZm+PGyqLTc6l234lk5Pw7tBqzvhev3GtrB4wwwqhvnM9JDUYYXzVaFsnofR2Dxwyx
+   eJzVl80OgyAQhLFc1XPv+P7P2HrYZDtd2FlQaw+TmIjwOfsDbCml7Q80OXq8tRDy5ukRw1iAYzU0yriv8VSKMiJPzee1sU5rbiseOcgYVdRPjEWG9z2Ms1JrzckZ14qXx1gcLtSRMbDE+DjD8x0ZmfjeifFqPmREjv25VN6hdH/DuhyNi8U4p28ubz6mh1p8DCfGGr9jfYxI5loOYDy717DzWjVzFSMrj7H8gA/3kFrvEaZVsd2h9zDxZnLsKsYaMzMm8l+9NdOrGl+Lo/U/kpfIuJ9V2fNpccZa+5bnozVGM+o7C7OfyXjh1PshmyNMPx9hlG/kjqDP+mwssH94jFP63HOz44HlaZSTORN4NcPWKd6d5B9ZLy3eEcYap8TdO/d4a0QZcQ6pe9YjlhFrJsqoOSXvIrl6hY+Wlzm14z7C2cvYys8zvLQY764XvPMm5A==
   </data>
  </layer>
  <objectgroup name="Objects" width="41" height="31">
@@ -18,9 +13,5 @@
   <object x="0" y="16" width="16" height="480"/>
   <object x="16" y="480" width="640" height="16"/>
   <object x="640" y="16" width="16" height="464"/>
-  <object x="112" y="192" width="32" height="32"/>
-  <object x="528" y="192" width="32" height="32"/>
-  <object x="144" y="368" width="32" height="80"/>
-  <object x="208" y="368" width="288" height="80"/>
  </objectgroup>
 </map>
