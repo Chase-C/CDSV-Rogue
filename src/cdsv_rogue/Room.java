@@ -50,8 +50,7 @@ public class Room extends World{
 	//where all of the logic happens
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException{
 		super.update(gc, sbg, delta);
-		//if (winCondition())
-			
+		win();
 	}
 	
 	public void addSpell(Spell s) {

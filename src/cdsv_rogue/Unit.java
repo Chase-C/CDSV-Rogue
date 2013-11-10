@@ -8,7 +8,7 @@ public abstract class Unit extends Entity{
 	
 	Room room;
 	
-	//protected float cooldown;
+	protected float cooldown;
 	protected float health;
 	protected boolean dead;
 	
