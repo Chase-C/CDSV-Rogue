@@ -32,7 +32,7 @@ public class FrogUnit extends Unit {
 		executeStatusEffects(delta);
 		
 		dt += delta;
-		if(dt > 100) {
+		if(dt > 1000) {
 			dt = 0;
 			float edx = enemy.dx;
 			float edy = enemy.dy;
@@ -58,9 +58,9 @@ public class FrogUnit extends Unit {
 			dx *= mod;
 			dy *= mod;
 			
-			System.out.printf("t: %g, b: %g, edx: %g, edy: %g\n", t, b, edx, edy);
+			//System.out.printf("t: %g, b: %g, edx: %g, edy: %g\n", t, b, edx, edy);
 			
-			room.addSpell(new Fireball(room, this, x + (dx * 5) + 8, y + (dy * 5) + 8, dx, dy));
+			room.addSpell(new Fireball(room, this, x + (dx * 5) + 8, y + (dy * 5) + 8, enemy.x, enemy.y, dx, dy));
 		}
 	}
 	

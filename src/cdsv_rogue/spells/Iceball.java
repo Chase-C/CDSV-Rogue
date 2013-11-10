@@ -9,10 +9,9 @@ import cdsv_rogue.Unit;
 
 public class Iceball extends Spell {
 
-	float dx, dy;
-	
-	public Iceball(Room room, Entity parent, float x, float y, float dx, float dy) {
-		super(room, parent, x, y, dx, dy, 2.5f, Color.cyan);
+	public Iceball(Room room, Entity parent, float x, float y, float tx, float ty, float dx, float dy) {
+		super("Snowball", room, parent, x, y, tx, ty, dx, dy, 2.5f, Color.cyan);
+		room.addSpell(this);
 	}
 
 	@Override

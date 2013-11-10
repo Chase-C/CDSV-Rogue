@@ -110,9 +110,13 @@ public class Room extends World {
 									i)));
 			add(wall);
 		}
+		
 		add(player);
 		add(frog);
 		enemies.add(frog);
 	}
 
+	public TiledMap getMap() {
+		return room;
+	}
 }

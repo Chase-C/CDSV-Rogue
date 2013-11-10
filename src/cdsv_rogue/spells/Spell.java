@@ -17,11 +17,12 @@ abstract public class Spell extends Entity {
 	
 	float cooldown;
 	
-	public Spell(Room room2, Entity parent, float x, float y, float dx, float dy, float cooldown, Color c) {
+	public Spell(String name, Room room2, Entity parent, float x, float y, float tx, float ty, float dx, float dy, float cooldown, Color c) {
 		super(x, y);
 		addType("SPELL");
 		setHitBox(0, 0, 16, 16);
 		
+		this.name = name;
 		this.room = room2;
 		this.parent = parent;
 		this.dx = dx;

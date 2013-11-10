@@ -1,7 +1,11 @@
 package cdsv_rogue;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 import org.newdawn.slick.*;
 
+import cdsv_rogue.spells.*;
 import it.randomtower.engine.entity.Entity;
 
 public abstract class Unit extends Entity{
@@ -11,12 +15,16 @@ public abstract class Unit extends Entity{
 	
 	protected float cooldown;
 	protected float health;
+	protected float maxHealth;
 	protected boolean dead;
 	
 	public float dx, dy, speedMod;
 	
+	protected Spells[] spells;
+	private ArrayList<Spell> passiveSpells;
+	
 	public enum StatusEffect {
-		BURNING(0), FROZEN(1), SHOCKED(2);
+		BURNING(0), FROZEN(1), SHOCKED(2), STUNNED(3);
 		
 		private int index;
 		private StatusEffect(int index) {
@@ -34,9 +42,17 @@ public abstract class Unit extends Entity{
 		this.room = room;
 		addType("UNIT");
 		
+		health = 100;
+		maxHealth = 100;
+		
+		currentSpell = 0;
+		spells = new Spells[3];
+		randSpells();
+		passiveSpells = new ArrayList<Spell>(0);
+		
 		dead = false;
-		statusEffects = new boolean[3];
-		statusDuration = new int[3];
+		statusEffects = new boolean[4];
+		statusDuration = new int[4];
 	}
 	
 	//casts the current spell selected
@@ -54,7 +70,53 @@ public abstract class Unit extends Entity{
 		System.out.println("Projectile added");
 	}*/
 	
+	public void render(GameContainer gc, Graphics g) throws SlickException{
+		g.setColor(Color.red);
+		g.drawRect(x, y - 12, 16, 4);
+		g.setColor(Color.green);
+		g.drawRect(x, y - 12, 16 * health / maxHealth, 4);
+	}
+	
+	protected void updatePassives() {
+		for(Spell s : passiveSpells)
+			s.activate(this);
+	}
+	
 	abstract public void move(Input i) throws SlickException;
+	
+	private void randSpells() {
+		int numSpells = Spells.values().length;
+		int spell1 = (new Random()).nextInt(numSpells);
+		int spell2;
+		do {
+			spell2 = (new Random()).nextInt(numSpells);
+		} while (spell2 == spell1);
+		
+		int spell3;
+		do {
+			spell3 = (new Random()).nextInt(numSpells);
+		} while (spell3 == spell1 && spell3 == spell2);
+		
+		System.out.printf("%d\n", spell1);
+		System.out.println(Spells.values()[spell1]);
+		spells[0] = Spells.values()[spell1];
+		spells[1] = Spells.values()[spell2];
+		spells[2] = Spells.values()[spell3];
+	}
+	
+	public void addPassiveSpell(Spell s) {
+		passiveSpells.add(s);
+	}
+	
+	public void removePassiveSpell(Spell s) {
+		passiveSpells.remove(s);
+	}
+	
+	public void heal(float amount) {
+		health += amount;
+		if(health > maxHealth)
+			health = maxHealth;
+	}
 	
 	public void damage(float amount) {
 		health -= amount;
@@ -65,19 +127,19 @@ public abstract class Unit extends Entity{
 	}
 	
 	protected void executeStatusEffects(int delta) {
+		speedMod = 1.0f;
 		if(statusEffects[StatusEffect.SHOCKED.getIndex()]) {
 			damage(0.4f);
 			speedMod = 0.8f;
-		} else {
-			speedMod = 1.0f;
 		}
 		if(statusEffects[StatusEffect.BURNING.getIndex()]) {
 			damage(0.1f);
 		}
 		if(statusEffects[StatusEffect.FROZEN.getIndex()]) {
 			speedMod = 0.5f;
-		} else {
-			speedMod = 1.0f;
+		}
+		if(statusEffects[StatusEffect.STUNNED.getIndex()]) {
+			speedMod = 0.0f;
 		}
 		
 		for(StatusEffect s : StatusEffect.values()) {
@@ -111,6 +173,14 @@ public abstract class Unit extends Entity{
 		damage(amount);
 		statusEffects[StatusEffect.SHOCKED.getIndex()] = true;
 		statusDuration[StatusEffect.SHOCKED.getIndex()] = duration;
+	}
+	
+	public void stun(int amount, int duration, int chance) {
+		damage(amount);
+		if((new Random()).nextInt(100) < chance) {
+			statusEffects[StatusEffect.STUNNED.getIndex()] = true;
+			statusDuration[StatusEffect.STUNNED.getIndex()] = duration;
+		}
 	}
 	//casts the current spell selected
 	//abstract public void castSpell();

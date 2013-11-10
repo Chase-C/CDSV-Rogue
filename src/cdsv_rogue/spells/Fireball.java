@@ -9,10 +9,9 @@ import cdsv_rogue.Unit;
 
 public class Fireball extends Spell {
 
-	float dx, dy;
-	
-	public Fireball(Room room, Entity parent, float x, float y, float dx, float dy) {
-		super(room, parent, x, y, dx, dy, 2.5f, Color.orange);
+	public Fireball(Room room, Entity parent, float x, float y, float tx, float ty, float dx, float dy) {
+		super("Fireball", room, parent, x, y, tx, ty, dx, dy, 2.5f, Color.orange);
+		room.addSpell(this);
 	}
 
 	@Override
