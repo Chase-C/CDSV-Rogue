@@ -32,24 +32,29 @@ public class FrogUnit extends Unit {
 		executeStatusEffects(delta);
 		
 		dt += delta;
-		if(dt > 100) {
+		if(dt > 1000) {
 			dt = 0;
-			float b = ((enemy.x - x) * enemy.dx) + ((enemy.y - y) * enemy.dy);
+			float edx = enemy.dx * 20;
+			float edy = enemy.dy * 20;
+			
+			float b = ((enemy.x - x) * edx) + ((enemy.y - y) * edy);
 			if(b < 0) return;
 			
-			float a = (enemy.dx * enemy.dx) + (enemy.dy * enemy.dy) - 25;
+			float a = (edx * edx) + (edy * edy) - 25;
 			float c = ((enemy.x - x) * (enemy.x - x)) + ((enemy.y - y) * (enemy.y - y));
 			
-			float t = ((-b) + (float)Math.sqrt((b * b) - (4 * a * c))) / (2 * a);
+			float t = (float) (1.4 * ((-b) + (float)Math.sqrt((b * b) - (4 * a * c))) / (2 * a));
 			
-			dx = (enemy.x - x + (enemy.dx * t));
-			dy = (enemy.y - y + (enemy.dy * t));								
+			dx = (enemy.x - x + (edx * t));
+			dy = (enemy.y - y + (edy * t));								
 			
 			float length = (float)Math.sqrt((dx * dx) + (dy * dy));
 			float mod = 5 / length;
 			
 			dx *= mod;
 			dy *= mod;
+			
+			System.out.printf("t: %g, dx: %g, dy: %g, b: %g\n, edx: %g, edy: %g", t, dx, dy, b, edx, edy);
 			
 			room.addSpell(new Fireball(room, this, x + (dx * 5) + 8, y + (dy * 5) + 8, dx, dy));
 		}
@@ -58,7 +63,6 @@ public class FrogUnit extends Unit {
 	@Override
 	public void move(Input i) {
 		// TODO Auto-generated method stub
-
 	}
 
 }
