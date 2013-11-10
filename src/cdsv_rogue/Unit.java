@@ -11,7 +11,7 @@ public abstract class Unit extends Entity{
 	protected float health;
 	protected boolean dead;
 	
-	protected float dx, dy, speedMod;
+	public float dx, dy, speedMod;
 	
 	public enum StatusEffect {
 		BURNING(0), FROZEN(1), SHOCKED(2);
