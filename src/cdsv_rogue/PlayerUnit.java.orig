@@ -6,9 +6,16 @@ import cdsv_rogue.spells.Fireball;
 
 public class PlayerUnit extends Unit{
 	
+<<<<<<< HEAD
 	public PlayerUnit(float x, float y, TestRoom room) {
 		super(x, y, room);
+		setHitBox(0, 0, 32, 32);
+=======
+	public PlayerUnit(float x, float y) {
+		super(x, y);
 		setHitBox(0, 0, 16, 16);
+		currentSpell = 1; //sets the current spell to fireball
+>>>>>>> cac2a2f09b334639dcf7265dc565dd9bd5722579
 		addType("PLAYER"); //to be used for collision
 		//control schemes can be referred
 		define("RIGHT", Input.KEY_D);

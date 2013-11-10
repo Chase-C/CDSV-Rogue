@@ -10,13 +10,13 @@ public class FrogUnit extends Unit {
 
 	public FrogUnit(float x, float y, TestRoom room) {
 		super(x, y, room);
-		setHitBox(0, 0, 32, 32);
+		setHitBox(0, 0, 16, 16);
 		addType("FROG");
 	}
 	
 	public void render(GameContainer gc, Graphics g) throws SlickException{
 		g.setColor(Color.red);
-		g.drawRect(x, y, 32, 32);
+		g.drawRect(x, y, 16, 16);
 	}
 	
 	@Override
