@@ -16,7 +16,7 @@ public class EnemyUnit extends Unit {
 	int dt;
 
 	private boolean facingRight;
-	private Animation animation, idleRight, idleLeft, walkLeft, walkRight;
+	private Animation animation, idleRight, idleLeft;
 	
 	public EnemyUnit(float x, float y, Room room, Unit player) throws SlickException {
 		super(x, y, room);
@@ -28,10 +28,8 @@ public class EnemyUnit extends Unit {
 		this.player = player;
 		
 		//set up animation
-		idleRight = new Animation(new SpriteSheet("res/sprites/guy.png", 9, 19), 100);
-		idleLeft = new Animation(new SpriteSheet("res/sprites/guyf.png", 9, 19), 100);
-		walkLeft = new Animation(new SpriteSheet("res/sprites/guywalkf.png", 9, 19), 100);
-		walkRight = new Animation(new SpriteSheet("res/sprites/guywalk.png", 9, 19), 100);
+		idleLeft = new Animation(new SpriteSheet("res/sprites/spook_idlef.png", 9, 19), 100);
+		idleRight = new Animation(new SpriteSheet("res/sprites/spook_idle.png", 9, 19), 100);
 		animation = idleRight;
 	}
 	

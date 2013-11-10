@@ -16,7 +16,7 @@ public abstract class Unit extends Entity{
 	protected float cooldown;
 	protected float health;
 	protected float maxHealth;
-	protected boolean dead;
+	public boolean dead;
 	
 	public float dx, dy, speedMod;
 	

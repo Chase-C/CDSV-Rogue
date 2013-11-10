@@ -20,7 +20,7 @@ abstract public class Spell extends Entity {
 	public Spell(String name, Room room2, Entity parent, float x, float y, float tx, float ty, float dx, float dy, float cooldown, Color c) {
 		super(x, y);
 		addType("SPELL");
-		setHitBox(0, 0, 8, 8);
+		setHitBox(0, 0, 16, 16);
 		
 		this.name = name;
 		this.room = room2;
@@ -35,7 +35,7 @@ abstract public class Spell extends Entity {
 
 	public void render(GameContainer gc, Graphics g){
 		g.setColor(color);
-		g.drawOval(x, y, 8, 8);
+		g.drawOval(x, y, 12, 12);
 	}
 	
 	public void update(GameContainer gc, int delta) throws SlickException{

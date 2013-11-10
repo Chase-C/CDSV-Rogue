@@ -6,7 +6,7 @@ import cdsv_rogue.spells.*;
 
 public class PlayerUnit extends Unit{
 	
-	private boolean ready;
+	public boolean ready;
 	private boolean facingRight;
 	private Animation animation, idleRight, idleLeft, walkLeft, walkRight;
 	

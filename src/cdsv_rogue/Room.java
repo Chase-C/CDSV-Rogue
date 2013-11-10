@@ -25,6 +25,7 @@ public class Room extends World {
 	
 	private int currentRoom;
 	private Image message;
+	private Sound currentSong;
 
 	public Room(int id, GameContainer gc) throws SlickException {
 		super(id, gc);
@@ -36,6 +37,7 @@ public class Room extends World {
 		
 		room = new TiledMap("res/levels/level1.tmx");
 		currentRoom = 1;
+		currentSong = new Sound("res/sounds/villageLoopable.wav");
 		message = new Image("res/pressenter.png");
 		generateSolids(room);
 		
@@ -65,10 +67,11 @@ public class Room extends World {
 		room.render(0, 0);
 		super.render(gc, sbg, g);
 		//draws the teleporter only if there are no more enemies left in the room
-		if(enemies.isEmpty()){
+		if(player.ready){
 			teleport.setPingPong(true);
 			teleport.draw(320, 240);
-			g.drawString("Press Enter to move on!", 230,  260);
+			//g.drawString("Press Enter to move on!", 230,  260);
+			message.draw(269, 180);
 		}
 	}
 
@@ -77,6 +80,15 @@ public class Room extends World {
 			throws SlickException {
 		super.update(gc, sbg, delta);
 		win();
+		
+		switch(currentRoom){
+			case 1: case 2: case 3: case 4:
+				currentSong.loop();
+				break;
+			case 5: case 6:
+				currentSong.play();
+				break;
+		}
 	}
 
 	public void addSpell(Spell s) {
@@ -128,7 +140,8 @@ public class Room extends World {
 				break;
 		}
 		//anything beyond this line should run regardless of the current room
-		currentRoom++;
+		if(currentRoom != 6)
+			currentRoom++;
 		generateSolids(room);
 		addEnemies();
 		add(player);
