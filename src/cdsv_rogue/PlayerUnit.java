@@ -6,7 +6,7 @@ import cdsv_rogue.spells.Fireball;
 
 public class PlayerUnit extends Unit{
 	
-	public PlayerUnit(float x, float y, TestRoom room) {
+	public PlayerUnit(float x, float y, Room room) {
 		super(x, y, room);
 		setHitBox(0, 0, 16, 16);
 		addType("PLAYER"); //to be used for collision

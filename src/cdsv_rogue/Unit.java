@@ -6,7 +6,7 @@ import it.randomtower.engine.entity.Entity;
 
 public abstract class Unit extends Entity{
 	
-	TestRoom room;
+	Room room;
 	
 	protected float health;
 	protected boolean dead;
@@ -27,7 +27,7 @@ public abstract class Unit extends Entity{
 	protected boolean[] statusEffects;
 	protected int[] statusDuration;
 
-	public Unit(float x, float y, TestRoom room) {
+	public Unit(float x, float y, Room room) {
 		super(x, y);
 		this.room = room;
 		addType("UNIT");

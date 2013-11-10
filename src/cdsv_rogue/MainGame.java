@@ -13,7 +13,7 @@ public class MainGame extends StateBasedGame{
 	 * sets the different states of the game with an id for each
 	 */
 	public void initStatesList(GameContainer gc) throws SlickException{
-		addState(new TestRoom(1, gc));
+		addState(new Room(1, gc));
 		enterState(1);
 	}
 	

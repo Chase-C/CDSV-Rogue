@@ -4,12 +4,12 @@ import it.randomtower.engine.entity.Entity;
 
 import org.newdawn.slick.*;
 
-import cdsv_rogue.TestRoom;
+import cdsv_rogue.Room;
 import cdsv_rogue.Unit;
 
 abstract public class Spell extends Entity {
 
-	TestRoom room;
+	Room room;
 	Entity parent;
 	
 	float dx, dy;
@@ -17,12 +17,12 @@ abstract public class Spell extends Entity {
 	
 	float cooldown;
 	
-	public Spell(TestRoom room, Entity parent, float x, float y, float dx, float dy, float cooldown, Color c) {
+	public Spell(Room room2, Entity parent, float x, float y, float dx, float dy, float cooldown, Color c) {
 		super(x, y);
 		addType("SPELL");
 		setHitBox(0, 0, 16, 16);
 		
-		this.room = room;
+		this.room = room2;
 		this.parent = parent;
 		this.dx = dx;
 		this.dy = dy;

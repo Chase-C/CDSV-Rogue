@@ -8,7 +8,7 @@ import org.newdawn.slick.SlickException;
 
 public class FrogUnit extends Unit {
 
-	public FrogUnit(float x, float y, TestRoom room) {
+	public FrogUnit(float x, float y, Room room) {
 		super(x, y, room);
 		setHitBox(0, 0, 16, 16);
 		addType("FROG");
