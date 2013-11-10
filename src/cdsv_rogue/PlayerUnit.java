@@ -2,12 +2,13 @@ package cdsv_rogue;
 
 import org.newdawn.slick.*;
 
+import cdsv_rogue.spells.Fireball;
+
 public class PlayerUnit extends Unit{
 	
-	public PlayerUnit(float x, float y) {
-		super(x, y);
+	public PlayerUnit(float x, float y, TestRoom room) {
+		super(x, y, room);
 		setHitBox(0, 0, 32, 32);
-		currentSpell = 1; //sets the current spell to fireball
 		addType("PLAYER"); //to be used for collision
 		//control schemes can be referred
 		define("RIGHT", Input.KEY_D);
@@ -24,10 +25,11 @@ public class PlayerUnit extends Unit{
 	
 	public void update(GameContainer gc, int delta) throws SlickException{
 		super.update(gc, delta);
-		move();
+		move(gc.getInput());
+		executeStatusEffects(delta);
 	}
 	
-	public void move(){
+	public void move(Input i){
 		//movement code moves the player if no Entities of type SOLID are in the way
 		if(check("RIGHT")){ 
 			if(collide(SOLID, x + 2, y) == null){ //collide() returns null if there's no collision
@@ -48,6 +50,18 @@ public class PlayerUnit extends Unit{
 			if(collide(SOLID, x, y + 2) == null){
 				y += 2;
 			}
+		}
+		if(check("CAST")) {
+			float dx = i.getMouseX() - x;
+			float dy = i.getMouseY() - y;									
+			
+			float length = (float)Math.sqrt((dx * dx) + (dy * dy));
+			float mod = 5 / length;
+			
+			dx *= mod;
+			dy *= mod;
+			
+			room.addSpell(new Fireball(room, this, x + (dx * 5) + 8, y + (dy * 5) + 8, dx, dy));
 		}
 	}
 
