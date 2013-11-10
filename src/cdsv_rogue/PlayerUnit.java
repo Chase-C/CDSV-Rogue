@@ -36,11 +36,11 @@ public class PlayerUnit extends Unit{
 		define("SPELL3", Input.KEY_3);
 		
 		//set up animation
-				idleRight = new Animation(new SpriteSheet("res/sprites/guy.png", 9, 19), 100);
-				idleLeft = new Animation(new SpriteSheet("res/sprites/guyf.png", 9, 19), 100);
-				walkLeft = new Animation(new SpriteSheet("res/sprites/guywalkf.png", 9, 19), 100);
-				walkRight = new Animation(new SpriteSheet("res/sprites/guywalk.png", 9, 19), 100);
-				animation = idleRight;
+		idleRight = new Animation(new SpriteSheet("res/sprites/guy.png", 9, 19), 100);
+		idleLeft = new Animation(new SpriteSheet("res/sprites/guyf.png", 9, 19), 100);
+		walkLeft = new Animation(new SpriteSheet("res/sprites/guywalkf.png", 9, 19), 100);
+		walkRight = new Animation(new SpriteSheet("res/sprites/guywalk.png", 9, 19), 100);
+		animation = idleRight;
 	}
 	
 	public void render(GameContainer gc, Graphics g) throws SlickException{

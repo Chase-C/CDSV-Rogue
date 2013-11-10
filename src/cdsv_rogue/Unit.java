@@ -47,6 +47,7 @@ public abstract class Unit extends Entity{
 		
 		health = 100;
 		maxHealth = 100;
+		speedMod = 1.0f;
 		
 		currentSpell = 0;
 		spells = new Spells[3];

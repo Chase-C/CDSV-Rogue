@@ -30,18 +30,14 @@ public class Room extends World {
 	}
 
 	// initializes anything right when the state starts
-	public void init(GameContainer gc, StateBasedGame sbg)
-			throws SlickException {
+	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		super.init(gc, sbg);
-		room = new TiledMap("res/levels/exampleRoom.tmx");
-		for (int i = 0; i < room.getObjectCount(0); i++) {
-			Solid wall = new Solid(room.getObjectX(0, i),
-					room.getObjectY(0, i), room.getObjectWidth(0, i),
-					room.getObjectHeight(0, i), 0, new Image(
-							room.getObjectWidth(0, i), room.getObjectHeight(0,
-									i)));
-			add(wall);
-		}
+		
+		room = new TiledMap("res/levels/level1.tmx");
+		currentRoom = 1;
+		message = new Image("res/pressenter.png");
+		generateSolids(room);
+		
 		player = new PlayerUnit(320, 240, this);
 		enemy = new EnemyUnit(120, 80, this, player);
 		spider = new SpiderUnit(180, 100, this, player);
@@ -50,11 +46,6 @@ public class Room extends World {
 		add(player);
 		add(enemy);
 		add(spider);
-
-		room = new TiledMap("res/levels/level1.tmx");
-		currentRoom = 1;
-		message = new Image("res/pressenter.png");
-		generateSolids(room);
 		// the add() method adds any Entity to a list, where all of the
 		//keep track of enemies
 		enemies = new ArrayList<Unit>();
@@ -65,7 +56,6 @@ public class Room extends World {
 		//animation setup for teleport object
 		SpriteSheet teleportFrames = new SpriteSheet("res/tele.png", 16, 16);
 		teleport = new Animation(teleportFrames, 120);
-		add(player);
 	}
 
 	// takes care of any of the rendering and graphics in the state
@@ -110,6 +100,7 @@ public class Room extends World {
 		player.x = player.startx + 16;
 		player.y = player.starty + 16;
 		player.randSpells();
+		player.setReady(false);
 		ArrayList<Entity> entities = (ArrayList<Entity>) super.getEntities();
 		for(int i = 0; i < entities.size(); i++){
 			if(entities.get(i).isType("SOLID") || entities.get(i).isType("ENEMY")){
@@ -151,10 +142,6 @@ public class Room extends World {
 									i)));
 			add(wall);
 		}
-		
-		add(player);
-		add(enemy);
-		add(spider);
 	}
 
 	public TiledMap getMap() {
