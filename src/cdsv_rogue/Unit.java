@@ -204,6 +204,10 @@ public abstract class Unit extends Entity{
 			statusDuration[StatusEffect.STUNNED.getIndex()] = duration;
 		}
 	}
+	
+	public float distToUnit(Unit u) {
+		return (float)Math.sqrt(((x - u.x) * (x - u.x)) + ((y - u.y) * (y - u.y)));
+	}
 	//casts the current spell selected
 	//abstract public void castSpell();
 }

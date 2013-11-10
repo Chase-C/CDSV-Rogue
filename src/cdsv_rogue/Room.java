@@ -5,6 +5,7 @@ import it.randomtower.engine.entity.Entity;
 import it.randomtower.engine.entity.Solid;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.StateBasedGame;
@@ -129,6 +130,7 @@ public class Room extends World {
 		//anything beyond this line should run regardless of the current room
 		currentRoom++;
 		generateSolids(room);
+		addEnemies();
 		add(player);
 	}
 	
@@ -141,6 +143,40 @@ public class Room extends World {
 							map.getObjectWidth(0, i), map.getObjectHeight(0,
 									i)));
 			add(wall);
+		}
+	}
+	
+	void addEnemies() {
+		int numEnemies = (new Random()).nextInt(3) + 2;
+		for (int i = 0; i < numEnemies; i++) {
+			int px = (new Random()).nextInt(656) + 1;
+			int py = (new Random()).nextInt(496) + 1;
+			Unit u;
+			if ((new Random()).nextInt(2) == 0) {
+				u = new EnemyUnit(px, py, this, player);
+			} else {
+				u = new SpiderUnit(px, py, this, player);
+			}
+
+			Entity other = null;
+			ArrayList<Entity> entities = (ArrayList<Entity>) super.getEntities();
+			for(Entity e : entities){
+				if(e.isType("SOLID")){
+					other = u.collideWith(e, u.x, u.y);
+				}
+			}
+			while (other != null && u.distToUnit(player) < 100) {
+				u.x = (new Random()).nextInt(656) + 1;
+				u.y = (new Random()).nextInt(496) + 1;
+				for(Entity e : entities){
+					if(e.isType("SOLID")){
+						other = u.collideWith(e, u.x, u.y);
+					}
+				}
+			}
+			
+			add(u);
+			enemies.add(u);
 		}
 	}
 

@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="41" height="31" tilewidth="16" tileheight="16">
  <tileset firstgid="1" name="tiles" tilewidth="16" tileheight="16">
-  <image source="tiles.png" width="144" height="80"/>
+  <image source="tiles.png" width="176" height="80"/>
  </tileset>
+ <layer name="Solids" width="41" height="31">
+  <data encoding="base64" compression="zlib">
+   eJzt1zEOACAIwEB+5P9/5+6gDg2CaRM2E47RERGjwVROI5NGJo1MGpk0Mp2MWTfs9vxgrJBGJo1MGpk0Mt0a13eZ/1GNGjsaX9bJWH0mQvMtiQ==
+  </data>
+ </layer>
  <layer name="Tile Layer 1" width="41" height="31">
   <data encoding="base64" compression="zlib">
-   eJzt06EKACAMRdGJ1Wg1+/9/aDKqCEPf4IabNtgp62bWA5SEw4hRKYwYlYpkbA+rl/vTmBed5l7t7kQyFuEi/cxvB0aMGDGqhRGjUhh9jeoNn+4hZA==
+   eJzt1DsKACEMRVHF1gW4/5Va2QhqCDEffQ9uNTJzGielGMuO+81YiVkZqT6OE0YZ509GqpPzXknjrSIZm+PGyqLTc6l234lk5Pw7tBqzvhev3GtrB4wwwqhvnM9JDUYYXzVaFsnofR2Dxwyx
   </data>
  </layer>
  <objectgroup name="Objects" width="41" height="31">
@@ -15,5 +20,7 @@
   <object x="640" y="16" width="16" height="464"/>
   <object x="112" y="192" width="32" height="32"/>
   <object x="528" y="192" width="32" height="32"/>
+  <object x="144" y="368" width="32" height="80"/>
+  <object x="208" y="368" width="288" height="80"/>
  </objectgroup>
 </map>
